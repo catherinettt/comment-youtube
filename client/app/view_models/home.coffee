@@ -1,4 +1,6 @@
 adapters = require 'helpers/adapters'
+Videos = require 'models/videos'
+Video = require 'models/video'
 
 
 module.exports = class HomeViewModel
@@ -7,6 +9,8 @@ module.exports = class HomeViewModel
     @search_query = ko.observable()
     @error_msg = ko.observable()
     @trending = ko.observable(false)
+    @collections = 
+      videos : new Videos()
   search: ->
     query = @search_query()
     console.log @search_query()
@@ -27,6 +31,15 @@ module.exports = class HomeViewModel
           @error_msg(data.error.message)
         else
           # console.log (data.data.id)
+          video = new Video({
+              id : data.data.id,
+              title : data.data.title,
+              rating : data.data.rating,
+              likeCount : data.data.likeCount,
+              ratingCount : data.data.ratingCount,
+              viewCount : data.data.viewCount
+            })
+          @collections.videos.create(video)
           window.location.href = "/watch?v=#{data.data.id}"
       else @error_msg("Video not found!")
     )

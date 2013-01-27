@@ -1,19 +1,20 @@
 doctype 5
 html
   head
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
     link(href='http://fonts.googleapis.com/css?family=Cabin:400,500,700|Exo:200,400,700', rel='stylesheet', type='text/css')
     link(rel="stylesheet", href="./app/stylesheets/app.css")
     script(src="./app/javascripts/vendor.js")
     script(src="./app/javascripts/app.js")
-    script(src="./app/javascripts/templates.js")
     script
       require('initialize')
+    block extra_head
   body
     div.container
-      h1 Youtube Comments Enabled!
-      ul.nav.nav-pills
-        li.active
-          a(href="/") home
+      div.row-fluid
+        h1 
+          a(href="/") Youtube Comments Enabled!
       block content
 
 script

@@ -175,12 +175,64 @@ window.require.register("initialize", function(exports, require, module) {
   ko.setTemplateEngine(new TemplateEngine());
 
   window.HomeViewModel = require('view_models/home');
+
+  window.VideoViewModel = require('view_models/video');
+  
+});
+window.require.register("models/video", function(exports, require, module) {
+  var Video, adapters,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  adapters = require('helpers/adapters');
+
+  module.exports = Video = (function(_super) {
+
+    __extends(Video, _super);
+
+    function Video() {
+      return Video.__super__.constructor.apply(this, arguments);
+    }
+
+    return Video;
+
+  })(Backbone.Model);
+  
+});
+window.require.register("models/videos", function(exports, require, module) {
+  var Video, Videos,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  Video = require('./video');
+
+  module.exports = Videos = (function(_super) {
+
+    __extends(Videos, _super);
+
+    function Videos() {
+      return Videos.__super__.constructor.apply(this, arguments);
+    }
+
+    Videos.prototype.url = '/products';
+
+    Videos.prototype.model = Video;
+
+    Videos.prototype.localStorage = new Backbone.LocalStorage("commentyoutube");
+
+    return Videos;
+
+  })(Backbone.Collection);
   
 });
 window.require.register("view_models/home", function(exports, require, module) {
-  var HomeViewModel, adapters;
+  var HomeViewModel, Video, Videos, adapters;
 
   adapters = require('helpers/adapters');
+
+  Videos = require('models/videos');
+
+  Video = require('models/video');
 
   module.exports = HomeViewModel = (function() {
 
@@ -189,6 +241,9 @@ window.require.register("view_models/home", function(exports, require, module) {
       this.search_query = ko.observable();
       this.error_msg = ko.observable();
       this.trending = ko.observable(false);
+      this.collections = {
+        videos: new Videos()
+      };
     }
 
     HomeViewModel.prototype.search = function() {
@@ -211,6 +266,7 @@ window.require.register("view_models/home", function(exports, require, module) {
         type: 'GET',
         url: url
       }, adapters.jqCallback(function(err, data) {
+        var video;
         if (!err && data) {
           if (data && _.isString(data)) {
             data = JSON.parse(data);
@@ -218,6 +274,15 @@ window.require.register("view_models/home", function(exports, require, module) {
           if (data.error) {
             return _this.error_msg(data.error.message);
           } else {
+            video = new Video({
+              id: data.data.id,
+              title: data.data.title,
+              rating: data.data.rating,
+              likeCount: data.data.likeCount,
+              ratingCount: data.data.ratingCount,
+              viewCount: data.data.viewCount
+            });
+            _this.collections.videos.create(video);
             return window.location.href = "/watch?v=" + data.data.id;
           }
         } else {
@@ -250,7 +315,51 @@ window.require.register("view_models/trending", function(exports, require, modul
   
 });
 window.require.register("view_models/video", function(exports, require, module) {
-  
+  var VideoViewModel;
 
+  module.exports = VideoViewModel = (function() {
+
+    function VideoViewModel() {
+      _.bindAll(this);
+      this.video = JSON.parse(localStorage["commentyoutube-" + window.video_id]);
+      this.id = window.video_id;
+    }
+
+    return VideoViewModel;
+
+  })();
   
+});
+window.require.register("views/home", function(exports, require, module) {
+  module.exports = function anonymous(locals, attrs, escape, rethrow, merge) {
+  attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
+  var buf = [];
+  with (locals || {}) {
+  var interp;
+  buf.push('<h5 data-bind="visible: error_msg, text: error_msg" class="alert"></h5><p>Enter Youtube ID or URL here</p><form class="form-search"><input type="text" data-bind="value: search_query"/><a data-bind="click : search" class="btn">Search</a></form><div data-bind="visible: trending, template: \'views/trending\'"></div>');
+  }
+  return buf.join("");
+  };
+});
+window.require.register("views/trending", function(exports, require, module) {
+  module.exports = function anonymous(locals, attrs, escape, rethrow, merge) {
+  attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
+  var buf = [];
+  with (locals || {}) {
+  var interp;
+  buf.push('<a href="watch?v=8rQGMW7nt4s#disqus_thread">Link </a><script>/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */\nvar disqus_shortname = \'commentyoutube\'; // required: replace example with your forum shortname\n\n/* * * DON\'T EDIT BELOW THIS LINE * * */\n(function () {\n    var s = document.createElement(\'script\'); s.async = true;\n    s.type = \'text/javascript\';\n    s.src = \'http://\' + disqus_shortname + \'.disqus.com/count.js\';\n    (document.getElementsByTagName(\'HEAD\')[0] || document.getElementsByTagName(\'BODY\')[0]).appendChild(s);\n}());</script>');
+  }
+  return buf.join("");
+  };
+});
+window.require.register("views/video", function(exports, require, module) {
+  module.exports = function anonymous(locals, attrs, escape, rethrow, merge) {
+  attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
+  var buf = [];
+  with (locals || {}) {
+  var interp;
+  buf.push('<div data-bind="with: video"><h3 data-bind="text: title"></h3><span data-bind="text: viewCount + \' views | \'"></span><span data-bind="text: likeCount + \' likes\'"></span></div>');
+  }
+  return buf.join("");
+  };
 });

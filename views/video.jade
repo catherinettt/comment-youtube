@@ -1,16 +1,24 @@
 extends layout
+block extra_head
+  script 
+    window.video_id = '#{id}';
+
 block content
 
-	iframe(src="http://www.youtube.com/embed/#{id}")
+  div(kb-inject="VideoViewModel")
+    div(data-bind="template: 'views/video'")
 
-	div#disqus_thread
+  div.row-fluid.video-frame
+    iframe.span12(src="http://www.youtube.com/embed/#{id}?showinfo=0", frameborder="0", height="400")
 
-	script
-		var disqus_shortname = 'commentyoutube'; // required: replace example with your forum shortname
-		var disqus_identifier = 'cyt_#{id}';
-		var disqus_url = 'http://comment-youtube.heroku.com/watch?v=#{id}';
-		(function() {
-			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-			dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-		})();
+  div#disqus_thread
+
+  script
+    var disqus_shortname = 'commentyoutube'; // required: replace example with your forum shortname
+    var disqus_identifier = 'cyt_#{id}';
+    var disqus_url = 'http://comment-youtube.heroku.com/watch?v=#{id}';
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();

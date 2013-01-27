@@ -20,3 +20,14 @@ window.require.register("views/trending", function(exports, require, module) {
   return buf.join("");
   };
 });
+window.require.register("views/video", function(exports, require, module) {
+  module.exports = function anonymous(locals, attrs, escape, rethrow, merge) {
+  attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
+  var buf = [];
+  with (locals || {}) {
+  var interp;
+  buf.push('<div data-bind="with: video"><h3 data-bind="text: title"></h3><span data-bind="text: viewCount + \' views | \'"></span><span data-bind="text: likeCount + \' likes\'"></span><iframe data-bind="attr : {src: \'http://www.youtube.com/embed/\' + id}"></iframe><div id="disqus_thread"></div><script>var disqus_shortname = \'commentyoutube\'; // required: replace example with your forum shortname\nvar disqus_identifier = \'cyt_' + escape((interp = id) == null ? '' : interp) + '\';\nvar disqus_url = \'http://comment-youtube.heroku.com/watch?v=' + escape((interp = id) == null ? '' : interp) + '\';\n(function() {\n  var dsq = document.createElement(\'script\'); dsq.type = \'text/javascript\'; dsq.async = true;\n  dsq.src = \'http://\' + disqus_shortname + \'.disqus.com/embed.js\';\n  (document.getElementsByTagName(\'head\')[0] || document.getElementsByTagName(\'body\')[0]).appendChild(dsq);\n})();</script></div>');
+  }
+  return buf.join("");
+  };
+});
