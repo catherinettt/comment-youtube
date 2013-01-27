@@ -45,7 +45,10 @@ app.get('/', routes.index);
 app.get('/api/loan/calculate', routes.calculate);
 
 
-app.listen(8080);
+var port = process.env.PORT || 8080;
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
 // app.get('/new', routes.neww);
 // app.get('/projects', routes.projects);
 // app.get('/about', routes.about);
