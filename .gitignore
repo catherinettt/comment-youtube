@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # osx noise
 .DS_Store
 profile
@@ -20,6 +20,8 @@ CVS
 
 node_modules/*
 =======
+=======
+>>>>>>> 42507bec672db3246ff76fae8fda78aadc35af3f
 lib-cov
 *.seed
 *.log
@@ -34,4 +36,4 @@ logs
 results
 
 npm-debug.log
->>>>>>> 2d5fd6c205ad7d89f3d1e28d27de783e2d32cac0
+
