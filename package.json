@@ -1,15 +1,15 @@
 {
 	"name":"mutui-apps",
 	"version":"0.0.1",
+	"engines" : {
+		"node" : "0.8.x",
+		"npm" : "1.2.x"
+	},
 	"dependencies": {
 		"express":"*", 
 		"request" : "*",
 		"async" : "*",
 		"pipette" : "*",
 		"bigdecimal" : "*"
-	},
-	"engines" : {
-		"node" : "0.8.x",
-		"npm" : "1.2.x"
 	}
 }
