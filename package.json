@@ -1,0 +1,11 @@
+{
+	"name":"mutui-apps",
+	"version":"0.0.1",
+	"dependencies": {
+		"express":"*", 
+		"request" : "*",
+		"async" : "*",
+		"pipette" : "*",
+		"bigdecimal" : "*"
+	}
+}
