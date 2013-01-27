@@ -1,0 +1,18 @@
+doctype 5
+html
+	head
+		script(src="http://code.jquery.com/jquery-latest.js")
+		link(rel="stylesheet", href="/vendors/bootstrap/css/bootstrap-responsive.css")
+		link(rel="stylesheet", href="/vendors/bootstrap/css/bootstrap.css")
+		<!--[if lt IE 9]>
+		script(src="http://html5shiv.googlecode.com/svn/trunk/html5.js")
+		<![endif]-->
+	body
+		div.container
+			h1 Youtube Comments Enabled!
+			ul.nav.nav-pills
+				li.active
+					a(href="/") home
+				li
+					a(href="/") trending
+			block content

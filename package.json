@@ -1,5 +1,5 @@
 {
-	"name":"mutui-apps",
+	"name":"comment-youtube",
 	"version":"0.0.1",
 	"engines" : {
 		"node" : "0.8.x",
@@ -8,8 +8,6 @@
 	"dependencies": {
 		"express":"*", 
 		"request" : "*",
-		"async" : "*",
-		"pipette" : "*",
-		"bigdecimal" : "*"
+		"jade" : "*"
 	}
 }

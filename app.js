@@ -7,8 +7,12 @@ var routes = require('./routes.js');
 var app = express();
 
 app.use(app.router)
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade'); 
+app.set('view options', { layout: false });
 app.use(express.bodyParser());
 app.use(express.methodOverride());
+app.use(express.static(__dirname + "/public"));
 // app.use(app.router);
 // app.use(logErrors);
 // app.use(clientErrorHandler);
@@ -42,7 +46,8 @@ function errorHandler(err, req, res, next) {
 // Routes
 
 app.get('/', routes.index);
-app.get('/api/loan/calculate', routes.calculate);
+app.get('/watch', routes.video)
+
 
 
 var port = process.env.PORT || 8080;
