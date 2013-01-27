@@ -21,12 +21,24 @@ exports.video = function(req, res){
 	// console.log(req)
 	// console.log(req.body)
 	video_id = req.query.v;
-	console.log(video_id)
+	// console.log(video_id)
 	// console.log(req.query.name)
-		res.render('video', {
-		id: video_id,
-		}, function (err, rendered){
-		res.writeHead(200, {'Content-Type':'text/html'});
-		res.end(rendered);		
+	res.render('video', {
+	id: video_id,
+	}, function (err, rendered){
+	res.writeHead(200, {'Content-Type':'text/html'});
+	res.end(rendered);		
 	})
+}
+
+exports.trending = function(req, res){
+	// console.log(req)
+	// console.log(req.body)
+	// video_id = req.query.v;
+	// console.log(video_id)
+	res.render('trending', 
+		function (err, rendered){
+			res.writeHead(200, {'Content-Type':'text/html'});
+			res.end(rendered);		
+		})
 }

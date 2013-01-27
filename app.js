@@ -47,6 +47,7 @@ function errorHandler(err, req, res, next) {
 
 app.get('/', routes.index);
 app.get('/watch', routes.video)
+app.get('/trending', routes.trending)
 
 
 

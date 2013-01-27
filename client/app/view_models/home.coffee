@@ -6,6 +6,7 @@ module.exports = class HomeViewModel
     _.bindAll(@, 'search')
     @search_query = ko.observable()
     @error_msg = ko.observable()
+    @trending = ko.observable(false)
   search: ->
     query = @search_query()
     console.log @search_query()
@@ -29,3 +30,6 @@ module.exports = class HomeViewModel
           window.location.href = "/watch?v=#{data.data.id}"
       else @error_msg("Video not found!")
     )
+
+  show_trending: ->
+    @trending(true)

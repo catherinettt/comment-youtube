@@ -30,4 +30,4 @@ exports.config =
         ]
 
     templates:
-      joinTo: 'javascripts/templates.js'
+      joinTo: 'javascripts/app.js'

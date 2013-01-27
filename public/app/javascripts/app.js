@@ -188,6 +188,7 @@ window.require.register("view_models/home", function(exports, require, module) {
       _.bindAll(this, 'search');
       this.search_query = ko.observable();
       this.error_msg = ko.observable();
+      this.trending = ko.observable(false);
     }
 
     HomeViewModel.prototype.search = function() {
@@ -225,7 +226,25 @@ window.require.register("view_models/home", function(exports, require, module) {
       })));
     };
 
+    HomeViewModel.prototype.show_trending = function() {
+      return this.trending(true);
+    };
+
     return HomeViewModel;
+
+  })();
+  
+});
+window.require.register("view_models/trending", function(exports, require, module) {
+  var TrendingViewModel;
+
+  module.exports = TrendingViewModel = (function() {
+
+    function TrendingViewModel() {
+      _.bindAll(this);
+    }
+
+    return TrendingViewModel;
 
   })();
   

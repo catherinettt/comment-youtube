@@ -1,5 +1,10 @@
+
+
 h5.alert(data-bind="visible: error_msg, text: error_msg")
-form
-  label Enter Youtube ID or URL here
+p Enter Youtube ID or URL here
+form.form-search
   input(type="text", data-bind="value: search_query")
-a.btn(data-bind="click : search") Search
+  a.btn(data-bind="click : search") Search
+
+
+div(data-bind="visible: trending, template: 'views/trending'")
