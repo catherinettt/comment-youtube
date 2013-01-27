@@ -280,7 +280,8 @@ window.require.register("view_models/home", function(exports, require, module) {
               rating: data.data.rating,
               likeCount: data.data.likeCount,
               ratingCount: data.data.ratingCount,
-              viewCount: data.data.viewCount
+              viewCount: data.data.viewCount,
+              uploader: data.data.uploader
             });
             _this.collections.videos.create(video);
             return window.location.href = "/watch?v=" + data.data.id;
@@ -320,9 +321,12 @@ window.require.register("view_models/video", function(exports, require, module) 
   module.exports = VideoViewModel = (function() {
 
     function VideoViewModel() {
+      var title;
       _.bindAll(this);
       this.video = JSON.parse(localStorage["commentyoutube-" + window.video_id]);
       this.id = window.video_id;
+      title = 'Comment Youtube | ' + this.video.title + ' by ' + this.video.uploader;
+      document.title = title;
     }
 
     return VideoViewModel;

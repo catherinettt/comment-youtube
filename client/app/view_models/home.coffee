@@ -37,7 +37,8 @@ module.exports = class HomeViewModel
               rating : data.data.rating,
               likeCount : data.data.likeCount,
               ratingCount : data.data.ratingCount,
-              viewCount : data.data.viewCount
+              viewCount : data.data.viewCount,
+              uploader : data.data.uploader
             })
           @collections.videos.create(video)
           window.location.href = "/watch?v=#{data.data.id}"
