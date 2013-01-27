@@ -19,9 +19,8 @@ xcuserdata
 CVS
 
 node_modules/*
-=======
-=======
->>>>>>> 42507bec672db3246ff76fae8fda78aadc35af3f
+*/node_modules/*
+*/*/node_modules/*
 lib-cov
 *.seed
 *.log

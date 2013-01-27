@@ -1,12 +1,16 @@
 doctype 5
 html
 	head
-		script(src="http://code.jquery.com/jquery-latest.js")
-		link(rel="stylesheet", href="/vendors/bootstrap/css/bootstrap-responsive.css")
-		link(rel="stylesheet", href="/vendors/bootstrap/css/bootstrap.css")
+		//- link(href='http://fonts.googleapis.com/css?family=Cabin:400,500,700|Exo:200,400,700', rel='stylesheet', type='text/css')
+		link(rel="stylesheet", href="./app/stylesheets/app.css")
 		<!--[if lt IE 9]>
 		script(src="http://html5shiv.googlecode.com/svn/trunk/html5.js")
 		<![endif]-->
+		script(src="./app/javascripts/vendor.js")
+		script(src="./app/javascripts/templates.js")
+		script(src="./app/javascripts/app.js")
+		script
+			require('initialize')
 	body
 		div.container
 			h1 Youtube Comments Enabled!
@@ -16,3 +20,14 @@ html
 				li
 					a(href="/") trending
 			block content
+
+script
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-38011017-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();

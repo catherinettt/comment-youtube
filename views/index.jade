@@ -1,8 +1,5 @@
 extends layout
 
 block content
-	form
-		label
-			h5 Enter Youtube ID or URL here
-		input(type="text")
-	a.btn Search
+  div(kb-inject="HomeViewModel")
+    div(data-bind="template: 'views/home'")
