@@ -1,1 +1,1 @@
-web: node MutuiAPI/app.js
+web: node app.js
